@@ -30,6 +30,10 @@
 		<beans:property name="annotatedClasses">
 			<beans:list>
 				<beans:value>com.arpc.spring.model.Person</beans:value>
+				<beans:value>com.arpc.psvm.modelPsvm.Customer</beans:value>
+				<beans:value>com.arpc.psvm.modelPsvm.Tran</beans:value>
+				<beans:value>com.arpc.psvm.modelPsvm.oneToMany.Cart</beans:value>
+				<beans:value>com.arpc.psvm.modelPsvm.oneToMany.Items</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">

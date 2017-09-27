@@ -1,4 +1,4 @@
-package com.arpc.psvm.modelPsvm;
+package com.arpc.psvm;
 
 import java.util.HashSet;
 import java.util.Set;
