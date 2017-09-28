@@ -10,52 +10,58 @@ import org.hibernate.annotations.Cascade;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.arpc.psvm.modelPsvm.manyToMany.CartMtm;
+import com.arpc.psvm.modelPsvm.manyToMany.ItemsMtm;
 import com.arpc.psvm.modelPsvm.oneToMany.Cart;
 import com.arpc.psvm.modelPsvm.oneToMany.Items;
-/*
-CREATE TABLE `Cart` (
-  `cart_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `total` decimal(10,0) NOT NULL,
-  `name` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`cart_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
-CREATE TABLE `Items` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+/*
+ CREATE TABLE `Cart` (
+  `cart_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `cart_total` decimal(10,0) NOT NULL,
+  PRIMARY KEY (`cart_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Item` (
+  `item_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `item_desc` varchar(20) NOT NULL,
+  `item_price` decimal(10,0) NOT NULL,
+  PRIMARY KEY (`item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Cart_Items` (
   `cart_id` int(11) unsigned NOT NULL,
-  `item_id` varchar(10) NOT NULL,
-  `item_total` decimal(10,0) NOT NULL,
-  `quantity` int(3) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `cart_id` (`cart_id`),
-  CONSTRAINT `items_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `Cart` (`cart_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `item_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`cart_id`,`item_id`),
+  CONSTRAINT `fk_cart` FOREIGN KEY (`cart_id`) REFERENCES `Cart` (`cart_id`),
+  CONSTRAINT `fk_item` FOREIGN KEY (`item_id`) REFERENCES `Item` (`item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
  */
-public class OneToManyEx {
+public class ManyToManyEx {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Session session=null;
 		Transaction transaction=null;
 		try{
-			Cart cart=new Cart();
-			cart.setName("MyCart1");
-			Items item1=new Items("I10",10,1,cart);
-			Items item2=new Items("I20",20,2,cart);
-			Set<Items> itemsSet=new HashSet();
-			itemsSet.add(item1);
-			itemsSet.add(item2);
-			cart.setItems(itemsSet);
-			cart.setTotal(10*2 + 20*2);
+			ItemsMtm item=new ItemsMtm();
+			item.setDescription("Samsong");
+			item.setPrice(10000);
+			ItemsMtm item2=new ItemsMtm();
+			item2.setDescription("Nokia");
+			item2.setPrice(12000);
+			Set<ItemsMtm> items=new HashSet();
+			items.add(item);
+			items.add(item2);
+			CartMtm cart=new CartMtm();
+			cart.setItems(items);
+			cart.setTotal(22000);
 		AbstractApplicationContext context=new ClassPathXmlApplicationContext("appServlet/psvm_servlet-context.xml");
 		SessionFactory sessionFactory=(SessionFactory)context.getBean("hibernate4AnnotatedSessionFactory");
 		session= sessionFactory.openSession();
 		transaction=session.getTransaction();
 		transaction.begin();
-		session.save(cart); //@Cascade(value=org.hibernate.annotations.CascadeType.SAVE_UPDATE) provided in Cart class on @oneToMany then both tables record saved
-			//other wise we have to save it sapretely
-		//session.save(item1); //items saved due to Cascade
-		//session.save(item2); //items saved due to Cascade
+		session.save(cart); 
 		transaction.commit();
 		}catch(Exception ex){
 			transaction.rollback();

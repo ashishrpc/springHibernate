@@ -34,6 +34,8 @@
 				<beans:value>com.arpc.psvm.modelPsvm.Tran</beans:value>
 				<beans:value>com.arpc.psvm.modelPsvm.oneToMany.Cart</beans:value>
 				<beans:value>com.arpc.psvm.modelPsvm.oneToMany.Items</beans:value>
+				<beans:value>com.arpc.psvm.modelPsvm.manyToMany.CartMtm</beans:value>
+				<beans:value>com.arpc.psvm.modelPsvm.manyToMany.ItemsMtm</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
