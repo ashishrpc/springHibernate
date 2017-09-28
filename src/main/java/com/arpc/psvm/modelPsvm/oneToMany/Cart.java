@@ -26,7 +26,7 @@ public class Cart {
 			<generator class="identity" />
 		</id>
 	 */
-	
+	//test
 	@Column(name="total")
 	private double total;
 	
