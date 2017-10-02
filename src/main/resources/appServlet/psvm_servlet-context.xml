@@ -46,8 +46,8 @@
 <!-- Second level Cache when run public static void main then after completion it will not stop where single level cache terminate-->	 				
 				<beans:prop key="hibernate.current_session_context_classl">thread</beans:prop>
 				<beans:prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</beans:prop>
-				<beans:prop key="hibernate.cache.use_second_level_cache">true</beans:prop>
-				<beans:prop key="hibernate.cache.use_query_cache">true</beans:prop>
+				<beans:prop key="hibernate.cache.use_second_level_cache">false</beans:prop>
+				<beans:prop key="hibernate.cache.use_query_cache">false</beans:prop>
 				<beans:prop key="net.sf.ehcache.configurationResourceName">appServlet/myehcache.xml</beans:prop>
 			
 <!-- hibernate.cache.region.factory_class is used to define the Factory class for Second level caching, I am using org.hibernate.cache.ehcache.EhCacheRegionFactory for this. If you want the factory class to be singleton, you should use org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory class.

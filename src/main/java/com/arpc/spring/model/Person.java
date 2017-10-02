@@ -5,15 +5,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import org.hibernate.annotations.Proxy;
 
 @Entity
 @Table(name="PERSON")
 //@Proxy(lazy=false)
+@NamedQuery(name="person.byId",query="from Person where id = ?")
+@NamedNativeQuery(name="person.byId.nativeQuery",query="select * from person where id=?", resultClass=Person.class)
 @Cache(usage=CacheConcurrencyStrategy.READ_ONLY, region="employee")
 public class Person {
 
