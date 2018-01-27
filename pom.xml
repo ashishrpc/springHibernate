@@ -6,7 +6,7 @@
   <packaging>war</packaging>
   <name>springHibernate</name>
   <properties>
-		<java-version>1.6</java-version>
+		<java-version>1.8</java-version>
 		<org.springframework-version>4.0.3.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.7.4</org.aspectj-version>
 		<org.slf4j-version>1.7.5</org.slf4j-version>
@@ -187,8 +187,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
@@ -202,6 +202,12 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
+            <!-- sonar -->
+            <plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.4.0.905</version>
+			</plugin>
         </plugins>
         <finalName>${project.artifactId}</finalName>
     </build>
