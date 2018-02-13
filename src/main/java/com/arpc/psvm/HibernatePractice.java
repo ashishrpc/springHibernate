@@ -43,6 +43,7 @@ public class HibernatePractice {
 		System.out.println(personList);
 		
 		context.registerShutdownHook();
+		context.close();
 	}
 
 }
